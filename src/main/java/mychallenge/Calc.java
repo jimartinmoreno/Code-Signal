@@ -18,31 +18,40 @@ public class Calc {
         Stack<Double> stack = new Stack<>();
 
         System.out.println(expr);
+        System.out.println("Input\tOperation\tStack after");
 
         String[] expStrings = expr.split("\\s+"); // matches one or many whitespaces.
         Arrays.stream(expStrings).forEach(s -> {
+            System.out.print(s + "\t");
             switch (s) {
                 case "+":
+                    System.out.print("Operation (+) \t\t");
                     stack.push(stack.pop() + stack.pop());
                     break;
                 case "-":
+                    System.out.print("Operation (-) \t\t");
                     stack.push(-stack.pop() + stack.pop());
                     break;
                 case "*":
+                    System.out.print("Operation (*) \t\t");
                     stack.push(stack.pop() * stack.pop());
                     break;
                 case "/":
+                    System.out.print("Operation (/) \t\t");
                     double divisor = stack.pop();
                     stack.push(stack.pop() / divisor);
                     break;
                 case "^":
+                    System.out.print("Operation (^) \t\t");
                     double exponent = stack.pop();
                     stack.push(Math.pow(stack.pop(), exponent));
                     break;
                 default:
+                    System.out.print("Push \t\t");
                     stack.push(Double.parseDouble(s));
                     break;
             }
+            System.out.println(stack);
         });
 
         double finalAnswer = stack.pop();

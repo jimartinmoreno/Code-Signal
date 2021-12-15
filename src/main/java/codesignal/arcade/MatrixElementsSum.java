@@ -31,7 +31,7 @@ public class MatrixElementsSum {
         //                .filter(value -> value != 0).reduce(0, Integer::sum);
         //
         //        System.out.println("sum = " + sum);
-
+        
         return sum;
     }
 
@@ -42,16 +42,16 @@ public class MatrixElementsSum {
      * @return
      */
     static int solution2(int[][] matrix) {
-        int s = 0;
-        for (int c = 0; c < matrix[0].length; ++c)
-            for (int r = 0; r < matrix.length; ++r) {
-                System.out.println("[" + r + ", " + c + "] = " + matrix[r][c]);
-                if (matrix[r][c] > 0)
-                    s += matrix[r][c];
+        int result = 0;
+        for (int column = 0; column < matrix[0].length; ++column)
+            for (int row = 0; row < matrix.length; ++row) {
+                System.out.println("[" + row + ", " + column + "] = " + matrix[row][column]);
+                if (matrix[row][column] > 0)
+                    result += matrix[row][column];
                 else break;
             }
-        System.out.println("sum = " + s);
-        return s;
+        System.out.println("result = " + result);
+        return result;
     }
 
     public static void main(String[] args) {
