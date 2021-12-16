@@ -68,9 +68,9 @@ public class Calc {
         // "5 1 2 + 4 * + 3 -"	14
         Calc calc = new Calc();
         try {
-            calc.evaluate("3 5 +");
-            calc.evaluate("1 2 3.5");
-            calc.evaluate("10000 123 +");
+//            calc.evaluate("3 5 +");
+//            calc.evaluate("1 2 3.5");
+//            calc.evaluate("10000 123 +");
             calc.evaluate("5 1 2 + 4 * + 3 -");
         } catch (Exception err) {
             System.out.println(err.getMessage());
