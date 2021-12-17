@@ -7,9 +7,7 @@ import java.util.regex.Pattern;
 
 public class CreditCard {
 
-    private CreditCard(){
-
-    }
+    private CreditCard(){}
 
     public static final String HYBRID = "Hybrid";
     public static final String NUMERIC = "Numeric";
