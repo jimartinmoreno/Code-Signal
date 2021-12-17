@@ -7,10 +7,15 @@ import java.util.regex.Pattern;
 
 public class CreditCard {
 
+    private CreditCard(){
+
+    }
+
     public static final String HYBRID = "Hybrid";
     public static final String NUMERIC = "Numeric";
     public static final String LETTERS = "Letters";
     public static final String SKIPPY = "Skippy";
+    public static final String INVALID = "invalid";
 
 
     public static String maskify(String creditCardNumber) {
@@ -66,13 +71,10 @@ public class CreditCard {
                 return HYBRID;
             }
             return NUMERIC;
+        } else if (lettersMatcher.find()) {
+            return LETTERS;
+        } else {
+            return INVALID;
         }
-        return LETTERS;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(CreditCard.maskify("A1!2/(3)[4]^%56789"));
-        System.out.println(CreditCard.maskify("1234-2345-3456-4567"));
-        System.out.println(CreditCard.maskify("12345"));
     }
 }
