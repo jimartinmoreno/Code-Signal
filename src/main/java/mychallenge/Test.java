@@ -1,10 +1,16 @@
 package mychallenge;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 public class Test {
     public static void main(String[] args) {
+
 //        String code = "A1234567BCDEFG89HI";
 //        String code = "4556364607935616";
 //        String code = "4556-3646-0793-5616";
@@ -13,9 +19,9 @@ public class Test {
         String type = getType(code);
         if ("Hibrid".equals(type)) {
             // System.out.println(m.start());
-            System.out.println("result = " +  processHibrid(code));
+            System.out.println("result = " + processHibrid(code));
         }
-        System.out.println("result = " +  code);
+        System.out.println("result = " + code);
     }
 
     private static String getType(String code) {
@@ -25,7 +31,7 @@ public class Test {
         Matcher lettersMatcher = lettersPattern.matcher(code);
         Matcher numericMatcher = numericPattern.matcher(code);
 
-        if (numericMatcher.find()){
+        if (numericMatcher.find()) {
             if (lettersMatcher.find()) {
                 System.out.println("Hibrid");
                 return "Hibrid";
@@ -51,7 +57,7 @@ public class Test {
             if (Character.isLetter(character) || flag) {
                 stringBuilder.append(character);
                 flag = true;
-            } else if (!flag){
+            } else if (!flag) {
                 stringBuilder.append("#");
             }
         }
