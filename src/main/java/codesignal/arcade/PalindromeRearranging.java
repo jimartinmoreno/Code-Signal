@@ -4,13 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class PalindromeRearranging {
-    static boolean solution2(String inputString) {
-        int map = 0;
-        for (int i = 0; i < inputString.length(); i++) {
-            map ^= 1 << (inputString.charAt(i) - 'a');
-        }
-        return map == 0 || (map & -map) == map;
-    }
 
     static boolean solution(String inputString) {
         Set<Character> chars = new HashSet<>();
