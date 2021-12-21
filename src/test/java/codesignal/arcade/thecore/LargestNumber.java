@@ -1,5 +1,8 @@
 package codesignal.arcade.thecore;
 
+/**
+ * https://app.codesignal.com/arcade/code-arcade/intro-gates/DdNKFA3XCX6XN7bNz
+ */
 public class LargestNumber {
     static int solution(int n) {
         return (int) Math.pow(10, n) - 1;
