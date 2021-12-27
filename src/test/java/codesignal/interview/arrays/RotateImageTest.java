@@ -1,6 +1,5 @@
 package codesignal.interview.arrays;
 
-import codesignal.arcade.MatrixElementsSum;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

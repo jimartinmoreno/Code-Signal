@@ -16,7 +16,7 @@ class GroupingDishesTest {
                         {"Salad", "Salad", "Sandwich"},
                         {"Sauce", "Pizza", "Quesadilla", "Salad"},
                         {"Tomato", "Pizza", "Salad", "Sandwich"}},
-                GroupingDishes.solution(new String[][]{{"Salad", "Tomato", "Cucumber", "Salad", "Sauce"},
+                GroupingDishes.solution2(new String[][]{{"Salad", "Tomato", "Cucumber", "Salad", "Sauce"},
                         {"Pizza", "Tomato", "Sausage", "Sauce", "Dough"},
                         {"Quesadilla", "Chicken", "Cheese", "Sauce"},
                         {"Sandwich", "Salad", "Bread", "Tomato", "Cheese"}}));
