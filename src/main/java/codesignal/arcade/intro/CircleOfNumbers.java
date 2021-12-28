@@ -1,4 +1,9 @@
-package codesignal.arcade.thecore;
+package codesignal.arcade.intro;
+
+/**
+ * https://app.codesignal.com/arcade/intro/level-7/vExYvcGnFsEYSt8nQ/solutions
+ */
+
 
 public class CircleOfNumbers {
 

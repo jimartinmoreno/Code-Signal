@@ -1,5 +1,6 @@
-package codesignal.arcade.thecore;
+package codesignal.arcade.intro;
 
+import codesignal.arcade.intro.CircleOfNumbers;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
