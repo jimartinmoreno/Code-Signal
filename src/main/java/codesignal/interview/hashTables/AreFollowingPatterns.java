@@ -28,7 +28,8 @@ public class AreFollowingPatterns {
 
     static boolean solution2(String[] strings, String[] patterns) {
         Map<String, String> ps = new HashMap<>();
-        return IntStream.range(0, strings.length).allMatch(i -> ps.computeIfAbsent(patterns[i], p -> strings[i]).equals(strings[i]))
+        return IntStream.range(0, strings.length)
+                .allMatch(i -> ps.computeIfAbsent(patterns[i], p -> strings[i]).equals(strings[i]))
                 && ps.size() == new HashSet<>(ps.values()).size();
     }
 }

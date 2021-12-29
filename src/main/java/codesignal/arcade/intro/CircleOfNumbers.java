@@ -12,7 +12,7 @@ public class CircleOfNumbers {
     }
 
     static int solution2(int n, int firstNumber) {
-        return (firstNumber + n/2) % n;
+        return (firstNumber + n / 2) % n;
     }
 
     static int solution3(int n, int firstNumber) {

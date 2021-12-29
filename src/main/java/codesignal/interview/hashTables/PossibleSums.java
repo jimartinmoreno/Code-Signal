@@ -4,7 +4,6 @@ import java.util.HashSet;
 
 /**
  * https://app.codesignal.com/interview-practice/task/rMe9ypPJkXgk3MHhZ/solutions?solutionId=wJBvafGg2hqonC98D
- * 1 + 2 + 1 + 2 + 1 + 1
  */
 public class PossibleSums {
     static int solution(int[] coins, int[] quantity) {
