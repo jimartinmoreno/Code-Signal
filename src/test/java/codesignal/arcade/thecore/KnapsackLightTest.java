@@ -1,5 +1,6 @@
-package codesignal.arcade.intro;
+package codesignal.arcade.thecore;
 
+import codesignal.arcade.thecore.KnapsackLight;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

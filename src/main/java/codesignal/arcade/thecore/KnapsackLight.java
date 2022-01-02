@@ -1,9 +1,11 @@
-package codesignal.arcade.intro;
+package codesignal.arcade.thecore;
 
-import java.util.Comparator;
 import java.util.Map;
-import java.util.Optional;
 import java.util.OptionalInt;
+
+/**
+ * https://app.codesignal.com/arcade/code-arcade/at-the-crossroads/r9azLYp2BDZPyzaG2
+ */
 
 public class KnapsackLight {
     static int solution2(int value1, int weight1, int value2, int weight2, int maxW) {

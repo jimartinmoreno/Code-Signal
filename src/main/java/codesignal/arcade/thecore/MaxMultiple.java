@@ -2,6 +2,9 @@ package codesignal.arcade.thecore;
 
 import java.util.stream.IntStream;
 
+/**
+ * https://app.codesignal.com/arcade/code-arcade/intro-gates/HEsmEacHr2s9wahjr
+ */
 public class MaxMultiple {
     static int solution(int divisor, int bound) {
         return IntStream.rangeClosed(1, bound)
