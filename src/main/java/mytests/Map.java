@@ -1,7 +1,6 @@
 package mytests;
 
-import java.util.HashMap;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,9 +10,21 @@ import static java.util.Map.entry;
 
 public class Map {
 
+
+
     public static void main(String[] args) {
-        extracted();
-        extracted1();
+//        extracted();
+//        extracted1();
+
+        List<String> list = new ArrayList<>();
+        list.add("String 1");
+
+        List<String> list2 = Collections.unmodifiableList(list);
+        list2.set(0, "String 2");
+
+        List<String> list3 = list.stream().toList();
+        list3.add("String 2");
+
     }
 
 
