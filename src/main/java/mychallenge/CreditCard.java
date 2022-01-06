@@ -7,6 +7,10 @@ import java.util.regex.Pattern;
 
 public class CreditCard {
 
+    //    private  Enum CreditCardType{
+    //        HYBRID, NUMERIC, LETTERS, SKIPPY, INVALID
+    //    };
+
     private CreditCard(){}
 
     public static final String HYBRID = "Hybrid";
@@ -18,7 +22,8 @@ public class CreditCard {
 
     public static String maskify(String creditCardNumber) {
         Optional<String> maskifyCreditCardNumberOptional = Optional.ofNullable(creditCardNumber)
-                .filter(Predicate.not(String::isEmpty)).map(CreditCard::maskifyCC);
+                .filter(Predicate.not(String::isEmpty))
+                .map(CreditCard::maskifyCC);
         return maskifyCreditCardNumberOptional.orElse("");
     }
 
@@ -28,10 +33,11 @@ public class CreditCard {
             String lastCharacters = creditCardNumber.substring(creditCardNumber.length() - 4);
             StringBuilder sb = new StringBuilder(firstCharacters);
 
-            final String subStringToMaskyfy = creditCardNumber.substring(1, creditCardNumber.length() - 4);
+            final String subStringToMaskify = creditCardNumber.substring(1, creditCardNumber.length() - 4);
+
             switch (getType(creditCardNumber)) {
                 case HYBRID:
-                    subStringToMaskyfy.chars().mapToObj(c -> (char) c).forEach(character -> {
+                    subStringToMaskify.chars().mapToObj(c -> (char) c).forEach(character -> {
                         if (Character.isLetter(character) || Character.getType(character) > Character.OTHER_NUMBER) {
                             sb.append(character);
                         } else {
@@ -40,7 +46,7 @@ public class CreditCard {
                     });
                     break;
                 case NUMERIC:
-                    subStringToMaskyfy.chars().mapToObj(c -> (char) c).forEach(character -> {
+                    subStringToMaskify.chars().mapToObj(c -> (char) c).forEach(character -> {
                         if (Character.getType(character) < Character.OTHER_NUMBER)
                             sb.append('#');
                         else
