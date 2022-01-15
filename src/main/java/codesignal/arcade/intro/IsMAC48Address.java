@@ -17,4 +17,8 @@ public class IsMAC48Address {
     static boolean solution2(String inputString) {
         return inputString.matches("^([0-9A-F][0-9A-F]-){5}[0-9A-F][0-9A-F]$");
     }
+
+    static boolean solution3(String inputString) {
+        return inputString.matches("([0-9A-F]{2}-){5}[0-9A-F]{2}");
+    }
 }
