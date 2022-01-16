@@ -20,8 +20,8 @@ class Challenge {
         return greeting.orElse("Hello there!"); // TODO: return the correct value
     }
 
-    public static void main(String[] args) {
-        System.out.println("sayHello = " + Challenge.sayHello("Qualified"));
-        System.out.println("sayHello = " + Challenge.sayHello(null));
-    }
+//    public static void main(String[] args) {
+//        System.out.println("sayHello = " + Challenge.sayHello("Qualified"));
+//        System.out.println("sayHello = " + Challenge.sayHello(null));
+//    }
 }

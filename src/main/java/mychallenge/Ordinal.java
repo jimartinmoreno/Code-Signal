@@ -2,14 +2,22 @@ package mychallenge;
 
 import java.util.Optional;
 
+/**
+ *
+ */
 public class Ordinal {
     private static String[] suffixes = new String[]{"th", "st", "nd", "rd", "th"};
 
     static String numberToOrdinal(Integer number) {
+        //System.out.println("number = " + number);
         Optional<String> integerOptional = Optional.ofNullable(number).map(Ordinal::getOrdinal);
         return integerOptional.orElse("Invalid number");
     }
 
+    /**
+     * @param number
+     * @return
+     */
     private static String getOrdinal(Integer number) {
         var sb = new StringBuilder();
         var tmp10 = number % 10;

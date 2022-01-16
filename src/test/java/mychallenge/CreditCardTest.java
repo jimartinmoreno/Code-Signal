@@ -1,6 +1,8 @@
 package mychallenge;
 
 import org.junit.jupiter.api.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import javax.management.InvalidAttributeValueException;
 
@@ -41,5 +43,13 @@ class CreditCardTest {
     void shouldNotMaskDigitsForNull(){
         assertEquals("", CreditCard.maskify(null));
         assertEquals("", CreditCard.maskify(""));
+    }
+
+    @BeforeMethod
+    public void setUp() {
+    }
+
+    @AfterMethod
+    public void tearDown() {
     }
 }

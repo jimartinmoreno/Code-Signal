@@ -11,17 +11,24 @@ import java.util.stream.IntStream;
 public class Test {
     public static void main(String[] args) {
 
+        IntStream.iterate(20, n -> n - 2)
+//                .skip(Integer.parseInt(args[0]))
+                .limit(12)
+                .filter(value -> value < 10)
+                .forEach(System.out::println);
+
+
 //        String code = "A1234567BCDEFG89HI";
 //        String code = "4556364607935616";
 //        String code = "4556-3646-0793-5616";
-        String code = "ABCD-EFGH-IJKLM-NOPQ";
-
-        String type = getType(code);
-        if ("Hibrid".equals(type)) {
-            // System.out.println(m.start());
-            System.out.println("result = " + processHibrid(code));
-        }
-        System.out.println("result = " + code);
+//        String code = "ABCD-EFGH-IJKLM-NOPQ";
+//
+//        String type = getType(code);
+//        if ("Hibrid".equals(type)) {
+//            // System.out.println(m.start());
+//            System.out.println("result = " + processHibrid(code));
+//        }
+//        System.out.println("result = " + code);
     }
 
     private static String getType(String code) {
