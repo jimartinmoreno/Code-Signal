@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-import javax.management.InvalidAttributeValueException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -30,7 +28,6 @@ class CreditCardTest {
         assertEquals("A#!#/(#)[#]^%#6789", CreditCard.maskify("A1!2/(3)[4]^%56789"));
         assertEquals("ABCD-ABCD-ABCD-ABCD", CreditCard.maskify("ABCD-ABCD-ABCD-ABCD"));
         assertEquals("Invalid Format", CreditCard.maskify("############"));
-
     }
 
     @Test

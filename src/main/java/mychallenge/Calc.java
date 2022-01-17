@@ -25,8 +25,8 @@ public class Calc {
             System.out.print(s + "\t");
             switch (s) {
                 case "+":
-                    System.out.print("Operation (+) \t\t");
                     stack.push(stack.pop() + stack.pop());
+                    System.out.print("Operation (+) \t\t");
                     break;
                 case "-":
                     System.out.print("Operation (-) \t\t");
