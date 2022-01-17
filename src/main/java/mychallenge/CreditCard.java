@@ -40,16 +40,18 @@ public class CreditCard {
             String result = null;
             switch (getType(creditCardNumber)) {
                 case HYBRID:
-                    final IntFunction<String> stringIntFunctionHybrid = character -> Character.isLetter((char) character) || Character.getType((char) character) > Character.OTHER_NUMBER ? String.valueOf((char) character) : "#";
+                    final IntFunction<String> stringIntFunctionHybrid = character ->
+                            Character.isLetter((char) character) || Character.getType((char) character) > Character.OTHER_NUMBER ? String.valueOf((char) character) : "#";
                     result = maskify(subStringToMaskify, stringIntFunctionHybrid);
                     sb.append(result);
                     break;
                 case NUMERIC:
-                    final IntFunction<String> stringIntFunctionNumeric = character -> (Character.getType((char) character) < Character.OTHER_NUMBER) ? "#" : String.valueOf((char) character);
-                    result = subStringToMaskify.chars()
-                            .mapToObj(stringIntFunctionNumeric)
-                            .reduce("", (c1, c2) -> c1 + c2);
-
+                    final IntFunction<String> stringIntFunctionNumeric = character ->
+                            (Character.getType((char) character) < Character.OTHER_NUMBER) ? "#" : String.valueOf((char) character);
+                    result = maskify(subStringToMaskify, stringIntFunctionNumeric);
+//                    result = subStringToMaskify.chars()
+//                            .mapToObj(stringIntFunctionNumeric)
+//                            .reduce("", (c1, c2) -> c1 + c2);
                     sb.append(result);
                     break;
                 case LETTERS:
