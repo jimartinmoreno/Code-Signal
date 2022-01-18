@@ -37,7 +37,7 @@ public class CreditCard {
 
             final String subStringToMaskify = creditCardNumber.substring(1, creditCardNumber.length() - 4);
 
-            String result = null;
+            String result;
             switch (getType(creditCardNumber)) {
                 case HYBRID:
                     final IntFunction<String> stringIntFunctionHybrid = character ->
@@ -49,9 +49,7 @@ public class CreditCard {
                     final IntFunction<String> stringIntFunctionNumeric = character ->
                             (Character.getType((char) character) < Character.OTHER_NUMBER) ? "#" : String.valueOf((char) character);
                     result = maskify(subStringToMaskify, stringIntFunctionNumeric);
-//                    result = subStringToMaskify.chars()
-//                            .mapToObj(stringIntFunctionNumeric)
-//                            .reduce("", (c1, c2) -> c1 + c2);
+                    // result = subStringToMaskify.chars().mapToObj(stringIntFunctionNumeric).reduce("", (c1, c2) -> c1 + c2);
                     sb.append(result);
                     break;
                 case LETTERS:
@@ -68,7 +66,8 @@ public class CreditCard {
     private static String maskify(String subStringToMaskify, IntFunction<String> stringIntFunction) {
         return subStringToMaskify.chars()
                 .mapToObj(stringIntFunction)
-                .reduce("", (c1, c2) -> c1 + c2);
+                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
+        //.reduce("", (c1, c2) -> c1 + c2);
     }
 
     private static String getType(String creditCardNumber) {
