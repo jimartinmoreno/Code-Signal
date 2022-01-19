@@ -1,4 +1,4 @@
-package mychallenge;
+package klarna;
 
 import org.junit.jupiter.api.Test;
 import org.testng.annotations.AfterMethod;

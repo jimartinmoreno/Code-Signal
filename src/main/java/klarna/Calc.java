@@ -1,4 +1,4 @@
-package mychallenge;
+package klarna;
 
 import java.util.Arrays;
 import java.util.Optional;

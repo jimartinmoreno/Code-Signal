@@ -1,31 +1,25 @@
-package mychallenge;
+package klarna;
 
 import java.util.Optional;
-import java.util.function.Consumer;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CreditCardV1 {
+public class CreditCard {
+    public static final String SKIPPY = "Skippy";
 
-    //    private  Enum CreditCardType{
-    //        HYBRID, NUMERIC, LETTERS, SKIPPY, INVALID
-    //    };
-
-    private CreditCardV1() {
+    private enum CreditCardType {
+        HYBRID, NUMERIC, LETTERS, INVALID
     }
 
-    public static final String HYBRID = "Hybrid";
-    public static final String NUMERIC = "Numeric";
-    public static final String LETTERS = "Letters";
-    public static final String SKIPPY = "Skippy";
-    public static final String INVALID = "invalid";
-
+    private CreditCard() {
+    }
 
     public static String maskify(String creditCardNumber) {
         Optional<String> maskifyCreditCardNumberOptional = Optional.ofNullable(creditCardNumber)
                 .filter(Predicate.not(String::isEmpty))
-                .map(CreditCardV1::maskifyCC);
+                .map(CreditCard::maskifyCC);
         return maskifyCreditCardNumberOptional.orElse("");
     }
 
@@ -39,23 +33,17 @@ public class CreditCardV1 {
 
             switch (getType(creditCardNumber)) {
                 case HYBRID:
-                    maskify(subStringToMaskify, character -> {
-                        if (Character.isLetter(character) || Character.getType(character) > Character.OTHER_NUMBER) {
-                            sb.append(character);
-                        } else {
-                            sb.append("#");
-                        }
-                    });
+                    final IntFunction<String> hybridFunction = character ->
+                            Character.isLetter((char) character) || Character.getType((char) character) > Character.OTHER_NUMBER ?
+                                    String.valueOf((char) character) : "#";
+
+                    sb.append(maskify(subStringToMaskify, hybridFunction));
                     break;
                 case NUMERIC:
-                    subStringToMaskify.chars()
-                            .mapToObj(c -> (char) c)
-                            .forEach(character -> {
-                                if (Character.getType(character) < Character.OTHER_NUMBER)
-                                    sb.append('#');
-                                else
-                                    sb.append(character);
-                            });
+                    final IntFunction<String> numericFunction = character ->
+                            (Character.getType((char) character) < Character.OTHER_NUMBER) ? "#" : String.valueOf((char) character);
+                    // result = subStringToMaskify.chars().mapToObj(numericFunction).reduce("", (c1, c2) -> c1 + c2);
+                    sb.append(maskify(subStringToMaskify, numericFunction));
                     break;
                 case LETTERS:
                     return creditCardNumber;
@@ -68,13 +56,14 @@ public class CreditCardV1 {
         return creditCardNumber;
     }
 
-    private static void maskify(String subStringToMaskify, Consumer<Character> consumer) {
-        subStringToMaskify.chars()
-                .mapToObj(c -> (char) c)
-                .forEach(consumer);
+    private static String maskify(String subStringToMaskify, IntFunction<String> function) {
+        return subStringToMaskify.chars()
+                .mapToObj(function)
+                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
+        //.reduce("", (c1, c2) -> c1 + c2);
     }
 
-    private static String getType(String creditCardNumber) {
+    private static CreditCardType getType(String creditCardNumber) {
         Pattern lettersPattern = Pattern.compile("\\p{L}");
         Pattern numericPattern = Pattern.compile("[0-9]+");
         Matcher lettersMatcher = lettersPattern.matcher(creditCardNumber);
@@ -82,13 +71,13 @@ public class CreditCardV1 {
 
         if (numericMatcher.find()) {
             if (lettersMatcher.find()) {
-                return HYBRID;
+                return CreditCardType.HYBRID;
             }
-            return NUMERIC;
+            return CreditCardType.NUMERIC;
         } else if (lettersMatcher.find()) {
-            return LETTERS;
+            return CreditCardType.LETTERS;
         } else {
-            return INVALID;
+            return CreditCardType.INVALID;
         }
     }
 }

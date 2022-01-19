@@ -1,18 +1,18 @@
-package mychallenge;
+package klarna;
 
 import java.util.Optional;
-import java.util.function.IntFunction;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CreditCard {
+public class CreditCardV1 {
 
     //    private  Enum CreditCardType{
     //        HYBRID, NUMERIC, LETTERS, SKIPPY, INVALID
     //    };
 
-    private CreditCard() {
+    private CreditCardV1() {
     }
 
     public static final String HYBRID = "Hybrid";
@@ -25,7 +25,7 @@ public class CreditCard {
     public static String maskify(String creditCardNumber) {
         Optional<String> maskifyCreditCardNumberOptional = Optional.ofNullable(creditCardNumber)
                 .filter(Predicate.not(String::isEmpty))
-                .map(CreditCard::maskifyCC);
+                .map(CreditCardV1::maskifyCC);
         return maskifyCreditCardNumberOptional.orElse("");
     }
 
@@ -37,20 +37,25 @@ public class CreditCard {
 
             final String subStringToMaskify = creditCardNumber.substring(1, creditCardNumber.length() - 4);
 
-            String result;
             switch (getType(creditCardNumber)) {
                 case HYBRID:
-                    final IntFunction<String> stringIntFunctionHybrid = character ->
-                            Character.isLetter((char) character) || Character.getType((char) character) > Character.OTHER_NUMBER ? String.valueOf((char) character) : "#";
-                    result = maskify(subStringToMaskify, stringIntFunctionHybrid);
-                    sb.append(result);
+                    maskify(subStringToMaskify, character -> {
+                        if (Character.isLetter(character) || Character.getType(character) > Character.OTHER_NUMBER) {
+                            sb.append(character);
+                        } else {
+                            sb.append("#");
+                        }
+                    });
                     break;
                 case NUMERIC:
-                    final IntFunction<String> stringIntFunctionNumeric = character ->
-                            (Character.getType((char) character) < Character.OTHER_NUMBER) ? "#" : String.valueOf((char) character);
-                    result = maskify(subStringToMaskify, stringIntFunctionNumeric);
-                    // result = subStringToMaskify.chars().mapToObj(stringIntFunctionNumeric).reduce("", (c1, c2) -> c1 + c2);
-                    sb.append(result);
+                    subStringToMaskify.chars()
+                            .mapToObj(c -> (char) c)
+                            .forEach(character -> {
+                                if (Character.getType(character) < Character.OTHER_NUMBER)
+                                    sb.append('#');
+                                else
+                                    sb.append(character);
+                            });
                     break;
                 case LETTERS:
                     return creditCardNumber;
@@ -63,11 +68,10 @@ public class CreditCard {
         return creditCardNumber;
     }
 
-    private static String maskify(String subStringToMaskify, IntFunction<String> stringIntFunction) {
-        return subStringToMaskify.chars()
-                .mapToObj(stringIntFunction)
-                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
-        //.reduce("", (c1, c2) -> c1 + c2);
+    private static void maskify(String subStringToMaskify, Consumer<Character> consumer) {
+        subStringToMaskify.chars()
+                .mapToObj(c -> (char) c)
+                .forEach(consumer);
     }
 
     private static String getType(String creditCardNumber) {
