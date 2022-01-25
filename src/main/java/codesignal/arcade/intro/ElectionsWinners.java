@@ -15,7 +15,7 @@ public class ElectionsWinners {
                 .boxed()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(value -> 1)))
                 .values().stream()
-                .filter(integer -> integer == 1 || k != 0)
+                .filter(i -> i == 1 || k != 0)
                 .reduce(Integer::sum).orElse(0);
     }
 
@@ -24,5 +24,11 @@ public class ElectionsWinners {
         return k == 0 ?
                 Arrays.stream(votes).filter(x -> x == max).count() == 1
                         ? 1 : 0 : (int) Arrays.stream(votes).filter(x -> x + k > max).count();
+    }
+
+    static int solution3(int[] votes, int k) {
+        int max = Arrays.stream(votes).max().getAsInt();
+        if (k == 0) return Arrays.stream(votes).filter(v -> v == max).count() == 1 ? 1 : 0;
+        return (int) Arrays.stream(votes).filter(v -> v + k > max).count();
     }
 }

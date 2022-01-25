@@ -8,17 +8,14 @@ import java.util.stream.IntStream;
 public class AddBorder {
 
     static String[] solution(String[] picture) {
-        var arrayLength = picture.length;
-        var elementsLength = picture[0].length();
+        List<String> pictList = new ArrayList<>(picture.length + 2);
+        String topFrame = IntStream.range(0, picture[0].length() + 2)
+                .mapToObj(value -> "*")
+                .reduce((s, s2) -> s + s2).orElse("");
 
-        List<String> pictList = new ArrayList<>(arrayLength + 2);
-        String result = IntStream.range(0, elementsLength + 2).mapToObj(value -> "*").reduce((s, s2) -> s + s2).get();
-        pictList.add(result);
-
-        pictList.addAll(Arrays.stream(picture)
-                .map(s -> new StringBuilder("*").append(s).append("*").toString()).toList()
-        );
-        pictList.add(result);
+        pictList.add(topFrame);
+        pictList.addAll(Arrays.stream(picture).map(s -> "*" + s + "*").toList());
+        pictList.add(topFrame);
 
         return pictList.toArray(new String[0]);
     }
@@ -26,11 +23,12 @@ public class AddBorder {
     static String[] solution2(String[] picture) {
         String[] framedPicture = new String[picture.length + 2];
 
-        for(int i = 0 ; i < picture.length ; i++) {
-            framedPicture[i+1] = '*' + picture[i] + '*';
+        for (int i = 0; i < picture.length; i++) {
+            framedPicture[i + 1] = '*' + picture[i] + '*';
         }
 
-        framedPicture[0] = framedPicture[picture.length + 1] = framedPicture[1].replaceAll(".","*");
+        framedPicture[0] = framedPicture[picture.length + 1] =
+                framedPicture[1].replaceAll(".", "*");
         return framedPicture;
     }
 
