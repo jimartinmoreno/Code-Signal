@@ -1,8 +1,8 @@
 package klarna;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,22 +31,22 @@ class CreditCardTest {
     }
 
     @Test
-    void shouldNotMaskDigitsForShortCreditCards(){
+    void shouldNotMaskDigitsForShortCreditCards() {
         assertEquals("54321", CreditCard.maskify("54321"));
         assertEquals("Skippy", CreditCard.maskify("Skippy"));
     }
 
     @Test
-    void shouldNotMaskDigitsForNull(){
+    void shouldNotMaskDigitsForNull() {
         assertEquals("", CreditCard.maskify(null));
         assertEquals("", CreditCard.maskify(""));
     }
 
-    @BeforeMethod
+    @BeforeEach
     public void setUp() {
     }
 
-    @AfterMethod
+    @AfterEach
     public void tearDown() {
     }
 }
